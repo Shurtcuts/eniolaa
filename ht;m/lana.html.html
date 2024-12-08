@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Lane</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .memory-lane-container {
+      background-color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    .memory-lane-media img,
+    .memory-lane-media video {
+      width: 80%;
+      max-width: 700px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .memory-lane-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .memory-lane-buttons button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .memory-lane-buttons button:hover {
+      background-color: #ff4b3a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="memory-lane-container">
+    <div class="memory-lane-media">
+      <!-- Dynamic media will be inserted here (images or videos) -->
+    </div>
+    <div class="memory-lane-buttons">
+      <button id="prev-button">Previous</button>
+      <button id="next-button">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const mediaItems = [
+      "a.jpg",
+      "b.jpg",
+      "c.jpg",
+      "d.jpg",
+      "e.jpg",
+      "f.jpg",
+      "g.jpg",
+      "h.jpg",
+      "i.jpg",
+      "j.jpg",
+      "k.jpg",
+      "l.jpg",
+      "m.jpg",
+      "n.jpg",
+      "o.jpg"
+    ];
+
+    let currentIndex = 0;
+
+    const mediaContainer = document.querySelector(".memory-lane-media");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+
+    function displayMedia(index) {
+      const mediaUrl = mediaItems[index];
+      mediaContainer.innerHTML = '';
+
+      if (mediaUrl.endsWith('.mp4')) {
+        const videoElement = document.createElement('video');
+        videoElement.src = mediaUrl;
+        videoElement.controls = true;
+        mediaContainer.appendChild(videoElement);
+      } else {
+        const imgElement = document.createElement('img');
+        imgElement.src = mediaUrl;
+        mediaContainer.appendChild(imgElement);
+      }
+    }
+
+    displayMedia(currentIndex);
+
+    prevButton.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        displayMedia(currentIndex);
+      }
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (currentIndex < mediaItems.length - 1) {
+        currentIndex++;
+        displayMedia(currentIndex);
+      }
+    });
+  </script>
+
+</body>
+</html>
